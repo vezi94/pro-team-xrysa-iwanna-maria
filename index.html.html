@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Αρχές HACCP - Διαδραστική Επισκόπηση</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .haccp-explanation {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+            text-align: center;
+        }
+        
+        .principles-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 30px;
+        }
+        
+        .principle-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eaeaea;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .card-content {
+            padding: 20px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .card-content p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .details-panel {
+            display: none;
+            background: white;
+            padding: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .details-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+        }
+        
+        .close-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: #c0392b;
+        }
+        
+        .details-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .details-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .details-text ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .details-text li {
+            margin-bottom: 8px;
+        }
+        
+        .details-example {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .details-example h4 {
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .step-dot.active {
+            background: #3498db;
+        }
+        
+        .share-section {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .share-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .share-btn:hover {
+            background: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        @media (max-width: 768px) {
+            .details-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .principle-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>7 Αρχές του HACCP</h1>
+            <p class="subtitle">Ανάλυση Κινδύνων και Κρίσιμα Σημεία Ελέγχου - Μια ολοκληρωμένη επισκόπηση του συστήματος ασφάλειας τροφίμων</p>
+        </header>
+        
+        <div class="haccp-explanation">
+            <p>Το HACCP (Hazard Analysis and Critical Control Points) είναι ένα προληπτικό σύστημα διασφάλισης της ασφάλειας των τροφίμων που αναγνωρίζεται διεθνώς. Βασίζεται σε 7 αρχές που βοηθούν στον εντοπισμό, αξιολόγηση και έλεγχο κινδύνων.</p>
+        </div>
+        
+        <div class="principles-container">
+            <!-- Αρχή 1 -->
+            <div class="principle-card" data-principle="1">
+                <div class="card-header" style="background-color: #3498db;">
+                    Αρχή 1: Ανάλυση Κινδύνων
+                </div>
+                <div class="card-content">
+                    <h3>Ανάλυση Κινδύνων</h3>
+                    <p>Πραγματοποίηση ανάλυσης κινδύνων για τον εντοπισμό πιθανών κινδύνων που πρέπει να αποτραπούν, να ελεγχθούν ή να μειωθούν σε αποδεκτά επίπεδα.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 2 -->
+            <div class="principle-card" data-principle="2">
+                <div class="card-header" style="background-color: #2ecc71;">
+                    Αρχή 2: Καθορισμός CCP
+                </div>
+                <div class="card-content">
+                    <h3>Κρίσιμα Σημεία Ελέγχου</h3>
+                    <p>Προσδιορισμός των κρίσιμων σημείων ελέγχου (CCPs) στα οποία μπορεί να εφαρμοστεί έλεγχος για την πρόληψη ή εξάλειψη κινδύνων ασφάλειας τροφίμων.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 3 -->
+            <div class="principle-card" data-principle="3">
+                <div class="card-header" style="background-color: #e74c3c;">
+                    Αρχή 3: Κρίσιμα Όρια
+                </div>
+                <div class="card-content">
+                    <h3>Κρίσιμα Όρια</h3>
+                    <p>Καθορισμός κρίσιμων ορίων για κάθε κρίσιμο σημείο ελέγχου. Τα κρίσιμα όρια είναι τα κριτήρια που διαχωρίζουν την αποδοτικότητα από την μη αποδοτικότητα.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 4 -->
+            <div class="principle-card" data-principle="4">
+                <div class="card-header" style="background-color: #f39c12;">
+                    Αρχή 4: Παρακολούθηση
+                </div>
+                <div class="card-content">
+                    <h3>Παρακολούθηση CCP</h3>
+                    <p>Δημιουργία και εφαρμογή διαδικασιών παρακολούθησης για κάθε κρίσιμο σημείο ελέγχου για να διασφαλιστεί ότι τα κρίσιμα όρια τηρούνται.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 5 -->
+            <div class="principle-card" data-principle="5">
+                <div class="card-header" style="background-color: #9b59b6;">
+                    Αρχή 5: Διορθωτικές Ενέργειες
+                </div>
+                <div class="card-content">
+                    <h3>Διορθωτικές Ενέργειες</h3>
+                    <p>Καθορισμός διορθωτικών ενεργειών που πρέπει να ληφθούν όταν η παρακολούθηση δείχνει ότι ένα CCP δεν είναι υπό έλεγχο.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 6 -->
+            <div class="principle-card" data-principle="6">
+                <div class="card-header" style="background-color: #1abc9c;">
+                    Αρχή 6: Επαλήθευση
+                </div>
+                <div class="card-content">
+                    <h3>Διαδικασίες Επαλήθευσης</h3>
+                    <p>Καθορισμός διαδικασιών επαλήθευσης για την επιβεβαίωση ότι το σύστημα HACCP λειτουργεί αποτελεσματικά.</p>
+                </div>
+            </div>
+            
+            <!-- Αρχή 7 -->
+            <div class="principle-card" data-principle="7">
+                <div class="card-header" style="background-color: #34495e;">
+                    Αρχή 7: Τεκμηρίωση
+                </div>
+                <div class="card-content">
+                    <h3>Τεκμηρίωση και Καταγραφή</h3>
+                    <p>Δημιουργία τεκμηρίωσης και διαδικασιών καταγραφής όλων των διαδικασιών και εγγράφων που αφορούν το σύστημα HACCP.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="detailsPanel" class="details-panel">
+            <div class="details-header">
+                <h2 class="details-title" id="detailsTitle">Αρχή 1: Ανάλυση Κινδύνων</h2>
+                <button class="close-btn" id="closeBtn">×</button>
+            </div>
+            <div class="details-content">
+                <div class="details-text" id="detailsText">
+                    <p>Η πρώτη αρχή του HACCP αφορά την πραγματοποίηση ανάλυσης κινδύνων για τον εντοπισμό πιθανών κινδύνων που πρέπει να αποτραπούν, να ελεγχθούν ή να μειωθούν σε αποδεκτά επίπεδα.</p>
+                    <p>Αυτή η διαδικασία περιλαμβάνει:</p>
+                    <ul>
+                        <li>Συλλογή και αξιολόγηση πληροφοριών σχετικά με τους κινδύνους</li>
+                        <li>Προσδιορισμό της σοβαρότητας και της πιθανότητας εμφάνισης των κινδύνων</li>
+                        <li>Αποτίμηση των μεθόδων ελέγχου που υπάρχουν ήδη</li>
+                        <li>Αποφάσεις σχετικά με τους κινδύνους που πρέπει να ελεγχθούν στο πλαίσιο του HACCP</li>
+                    </ul>
+                </div>
+                <div class="details-example" id="detailsExample">
+                    <h4>Παράδειγμα:</h4>
+                    <p>Σε μια μονάδα επεξεργασίας κρέατος, η ανάλυση κινδύνων μπορεί να εντοπίσει κινδύνους όπως:</p>
+                    <ul>
+                        <li>Βιολογικοί: Παρουσία παθογόνων μικροοργανισμών (π.χ. Salmonella, E. coli)</li>
+                        <li>Χημικοί: Υπολείμματα φαρμάκων ή καθαριστικών</li>
+                        <li>Φυσικοί: Παρουσία μεταλλικών θραυσμάτων ή κόκκων</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="step-indicator" id="stepIndicator">
+                <!-- Θα προστεθεί δυναμικά με JavaScript -->
+            </div>
+        </div>
+        
+        <div class="share-section">
+            <button class="share-btn" id="shareBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                    <polyline points="16 6 12 2 8 6"></polyline>
+                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+                Κοινοποίηση
+            </button>
+        </div>
+        
+        <footer>
+            <p>Διαδραστική Επισκόπηση των 7 Αρχών HACCP | Δημιουργήθηκε για εκπαιδευτικούς σκοπούς</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const principleCards = document.querySelectorAll('.principle-card');
+            const detailsPanel = document.getElementById('detailsPanel');
+            const detailsTitle = document.getElementById('detailsTitle');
+            const detailsText = document.getElementById('detailsText');
+            const detailsExample = document.getElementById('detailsExample');
+            const closeBtn = document.getElementById('closeBtn');
+            const stepIndicator = document.getElementById('stepIndicator');
+            const shareBtn = document.getElementById('shareBtn');
+            
+            // Δεδομένα για κάθε αρχή
+            const principlesData = {
+                1: {
+                    title: "Αρχή 1: Ανάλυση Κινδύνων",
+                    text: `
+                        <p>Η πρώτη αρχή του HACCP αφορά την πραγματοποίηση ανάλυσης κινδύνων για τον εντοπισμό πιθανών κινδύνων που πρέπει να αποτραπούν, να ελεγχθούν ή να μειωθούν σε αποδεκτά επίπεδα.</p>
+                        <p>Αυτή η διαδικασία περιλαμβάνει:</p>
+                        <ul>
+                            <li>Συλλογή και αξιολόγηση πληροφοριών σχετικά με τους κινδύνους</li>
+                            <li>Προσδιορισμό της σοβαρότητας και της πιθανότητας εμφάνισης των κινδύνων</li>
+                            <li>Αποτίμηση των μεθόδων ελέγχου που υπάρχουν ήδη</li>
+                            <li>Αποφάσεις σχετικά με τους κινδύνους που πρέπει να ελεγχθούν στο πλαίσιο του HACCP</li>
+                        </ul>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Σε μια μονάδα επεξεργασίας κρέατος, η ανάλυση κινδύνων μπορεί να εντοπίσει κινδύνους όπως:</p>
+                        <ul>
+                            <li>Βιολογικοί: Παρουσία παθογόνων μικροοργανισμών (π.χ. Salmonella, E. coli)</li>
+                            <li>Χημικοί: Υπολείμματα φαρμάκων ή καθαριστικών</li>
+                            <li>Φυσικοί: Παρουσία μεταλλικών θραυσμάτων ή κόκκων</li>
+                        </ul>
+                    `
+                },
+                2: {
+                    title: "Αρχή 2: Καθορισμός Κρίσιμων Σημείων Ελέγχου (CCPs)",
+                    text: `
+                        <p>Η δεύτερη αρχή αφορά τον προσδιορισμό των κρίσιμων σημείων ελέγχου (CCPs) στα οποία μπορεί να εφαρμοστεί έλεγχος για την πρόληψη ή εξάλειψη ενός κινδύνου ασφάλειας τροφίμων ή μείωσή του σε αποδεκτό επίπεδο.</p>
+                        <p>Τα CCPs είναι σημεία, βήματα ή διαδικασίες όπου μπορεί να εφαρμοστεί έλεγχος και είναι απαραίτητο για την πρόληψη ή εξάλειψη ενός κινδύνου ασφάλειας τροφίμων ή τη μείωσή του σε αποδεκτό επίπεδο.</p>
+                        <p>Για τον προσδιορισμό των CCPs χρησιμοποιείται συχνά το Δέντρο Αποφάσεων (Decision Tree).</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Σε μια μονάδα παραγωγής χυμών, τα κρίσιμα σημεία ελέγχου μπορεί να είναι:</p>
+                        <ul>
+                            <li>Θερμική επεξεργασία (παστερίωση) για την εξάλειψη παθογόνων μικροοργανισμών</li>
+                            <li>Φιλτράρισμα για την απομάκρυνση φυσικών ακαθαρσιών</li>
+                            <li>Έλεγχος pH για την πρόληψη ανάπτυξης μικροοργανισμών</li>
+                        </ul>
+                    `
+                },
+                3: {
+                    title: "Αρχή 3: Καθορισμός Κρίσιμων Ορίων",
+                    text: `
+                        <p>Η τρίτη αρχή αφορά τον καθορισμό κρίσιμων ορίων για κάθε κρίσιμο σημείο ελέγχου (CCP). Τα κρίσιμα όρια είναι τα κριτήρια που διαχωρίζουν την αποδοτικότητα από την μη αποδοτικότητα.</p>
+                        <p>Τα κρίσιμα όρια πρέπει να είναι:</p>
+                        <ul>
+                            <li>Ειδικά και μετρήσιμα</li>
+                            <li>Βασισμένα σε επιστημονικά δεδομένα</li>
+                            <li>Εύκολα παρακολουθούμενα</li>
+                            <li>Σχετιζόμενα με τον κίνδυνο που ελέγχεται</li>
+                        </ul>
+                        <p>Όταν τα κρίσιμα όρια παραβιαστούν, πρέπει να λαμβάνονται διορθωτικές ενέργειες.</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Για την παστερίωση γάλακτος, τα κρίσιμα όρια μπορεί να είναι:</p>
+                        <ul>
+                            <li>Θερμοκρασία: 72°C για τουλάχιστον 15 δευτερόλεπτα</li>
+                            <li>Χρόνος παραμονής στον εναλλάκτη θερμότητας: τουλάχιστον 15 δευτερόλεπτα</li>
+                        </ul>
+                        <p>Για την ψύξη μαγειρεμένων τροφίμων:</p>
+                        <ul>
+                            <li>Θερμοκρασία: κάτω από 5°C εντός 90 λεπτών από το μαγείρεμα</li>
+                        </ul>
+                    `
+                },
+                4: {
+                    title: "Αρχή 4: Δημιουργία Συστήματος Παρακολούθησης",
+                    text: `
+                        <p>Η τέταρτη αρχή αφορά τη δημιουργία και εφαρμογή διαδικασιών παρακολούθησης για κάθε κρίσιμο σημείο ελέγχου (CCP) για να διασφαλιστεί ότι τα κρίσιμα όρια τηρούνται.</p>
+                        <p>Η παρακολούθηση πρέπει να είναι:</p>
+                        <ul>
+                            <li>Συνεχής ή σε τακτά χρονικά διαστήματα</li>
+                            <li>Αξιόπιστη και ακριβής</li>
+                            <li>Αποτελεσματική και εφικτή</li>
+                            <li>Τεκμηριωμένη</li>
+                        </ul>
+                        <p>Η παρακολούθηση επιτρέπει την ταχεία ανίχνευση αποκλίσεων από τα κρίσιμα όρια, ώστε να μπορούν να ληφθούν άμεσα διορθωτικές ενέργειες.</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Μέθοδοι παρακολούθησης για διάφορα CCPs:</p>
+                        <ul>
+                            <li>Για θερμική επεξεργασία: Συνεχής καταγραφή θερμοκρασίας με θερμόμετρο και χαρτογράφο</li>
+                            <li>Για έλεγχο μεγέθους σήτων: Οπτικός έλεγχος ή χρήση διαβρωτών</li>
+                            <li>Για έλεγχο συγκεντρώσεων χημικών: Χρήση δοκιμαστικών εργαλείων ή εργαστηριακών αναλύσεων</li>
+                            <li>Για έλεγχο χρόνου: Χρήση χρονομέτρων</li>
+                        </ul>
+                    `
+                },
+                5: {
+                    title: "Αρχή 5: Καθορισμός Διορθωτικών Ενεργειών",
+                    text: `
+                        <p>Η πέμπτη αρχή αφορά τον καθορισμό διορθωτικών ενεργειών που πρέπει να ληφθούν όταν η παρακολούθηση δείχνει ότι ένα κρίσιμο σημείο ελέγχου (CCP) δεν είναι υπό έλεγχο (δηλαδή, όταν παραβιάζονται τα κρίσιμα όρια).</p>
+                        <p>Οι διορθωτικές ενέργειες πρέπει να:</p>
+                        <ul>
+                            <li>Διορθώνουν την αιτία της απόκλισης</li>
+                            <li>Επαναφέρουν τον έλεγχο στο CCP</li>
+                            <li>Προβλέπουν την τύχη του προϊόντος που παράχθηκε κατά τη διάρκεια της απόκλισης</li>
+                            <li>Τεκμηριώνονται σωστά</li>
+                        </ul>
+                        <p>Οι διορθωτικές ενέργειες πρέπει να καθορίζονται εκ των προτέρων για κάθε CCP.</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Διορθωτικές ενέργειες για διάφορα σενάρια:</p>
+                        <ul>
+                            <li>Αν η θερμοκρασία παστερίωσης είναι χαμηλότερη από το κρίσιμο όριο:
+                                <ul>
+                                    <li>Ανακατεύθυνση του προϊόντος για επανεπεξεργασία</li>
+                                    <li>Προσαρμογή του εξοπλισμού</li>
+                                    <li>Καταγραφή του συμβάντος</li>
+                                </ul>
+                            </li>
+                            <li>Αν εντοπιστεί μεταλλική ρύπανση:
+                                <ul>
+                                    <li>Απόσυρση του μολυσμένου προϊόντος</li>
+                                    <li>Έλεγχος και συντήρηση του εξοπλισμού ανίχνευσης μετάλλων</li>
+                                    <li>Επανάληψη του ελέγχου για τα επόμενα προϊόντα</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    `
+                },
+                6: {
+                    title: "Αρχή 6: Δημιουργία Διαδικασιών Επαλήθευσης",
+                    text: `
+                        <p>Η έκτη αρχή αφορά τον καθορισμό διαδικασιών επαλήθευσης για την επιβεβαίωση ότι το σύστημα HACCP λειτουργεί αποτελεσματικά.</p>
+                        <p>Οι διαδικασίες επαλήθευσης περιλαμβάνουν:</p>
+                        <ul>
+                            <li>Επαλήθευση της ορθότητας του σχεδίου HACCP</li>
+                            <li>Επαλήθευση ότι τα CCPs ελέγχονται αποτελεσματικά</li>
+                            <li>Επαλήθευση της αποτελεσματικότητας των διορθωτικών ενεργειών</li>
+                            <li>Επαναξιολόγηση του συστήματος HACCP σε τακτά χρονικά διαστήματα</li>
+                        </ul>
+                        <p>Η επαλήθευση διαφέρει από την παρακολούθηση καθώς είναι μια δραστηριότητα που πραγματοποιείται περιοδικά για να επιβεβαιώσει την αποτελεσματικότητα του συστήματος.</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Δραστηριότητες επαλήθευσης:</p>
+                        <ul>
+                            <li>Ανασκόπηση των καταγραφών παρακολούθησης και διορθωτικών ενεργειών</li>
+                            <li>Δειγματοληψία και δοκιμές προϊόντων</li>
+                            <li>Επαλήθευση της βαθμονόμησης των οργάνων μέτρησης</li>
+                            <li>Επαλήθευση της αποτελεσματικότητας των διαδικασιών καθαρισμού και απολύμανσης</li>
+                            <li>Επαναξιολόγηση του σχεδίου HACCP όταν αλλάζουν υλικά, διαδικασίες ή προϊόντα</li>
+                            <li>Εξωτερικοί έλεγχοι από πιστοποιητικά φορείς</li>
+                        </ul>
+                    `
+                },
+                7: {
+                    title: "Αρχή 7: Δημιουργία Τεκμηρίωσης και Καταγραφών",
+                    text: `
+                        <p>Η έβδομη αρχή αφορά τη δημιουργία τεκμηρίωσης και διαδικασιών καταγραφής όλων των διαδικασιών και εγγράφων που αφορούν το σύστημα HACCP.</p>
+                        <p>Η τεκμηρίωση και οι καταγραφές πρέπει να:</p>
+                        <ul>
+                            <li>Είναι επαρκείς για να αποδεικνύουν την αποτελεσματική εφαρμογή του συστήματος HACCP</li>
+                            <li>Να είναι εύκολα προσβάσιμες</li>
+                            <li>Να διατηρούνται για κατάλληλο χρονικό διάστημα</li>
+                            <li>Να εγκρίνονται από εξουσιοδοτημένο προσωπικό</li>
+                        </ul>
+                        <p>Η σωστή τεκμηρίωση επιτρέπει την απόδειξη της συμμόρφωσης και παρέχει ένα ιστορικό για ανασκόπηση και βελτίωση του συστήματος.</p>
+                    `,
+                    example: `
+                        <h4>Παράδειγμα:</h4>
+                        <p>Τεκμηρίωση και καταγραφές HACCP:</p>
+                        <ul>
+                            <li>Σχέδιο HACCP</li>
+                            <li>Αρχεία ανάλυσης κινδύνων</li>
+                            <li>Καταγραφές παρακολούθησης CCP</li>
+                            <li>Καταγραφές διορθωτικών ενεργειών</li>
+                            <li>Αποτελέσματα δειγματοληψίας και δοκιμών</li>
+                            <li>Αρχεία βαθμονόμησης οργάνων</li>
+                            <li>Αρχεία επαλήθευσης και ανασκόπησης του συστήματος</li>
+                            <li>Προγράμματα εκπαίδευσης προσωπικού</li>
+                        </ul>
+                    `
+                }
+            };
+            
+            // Προσθήκη event listeners για τις κάρτες
+            principleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const principleNumber = this.getAttribute('data-principle');
+                    showPrincipleDetails(principleNumber);
+                });
+            });
+            
+            // Κλείσιμο panel
+            closeBtn.addEventListener('click', function() {
+                detailsPanel.style.display = 'none';
+            });
+            
+            // Κουμπί κοινοποίησης
+            shareBtn.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: '7 Αρχές HACCP - Διαδραστική Επισκόπηση',
+                        text: 'Μάθετε για τις 7 αρχές του συστήματος HACCP για ασφάλεια τροφίμων',
+                        url: window.location.href
+                    })
+                    .catch(error => console.log('Σφάλμα κοινοποίησης:', error));
+                } else {
+                    // Fallback για προγράμματα περιήγησης που δεν υποστηρίζουν το Web Share API
+                    const url = window.location.href;
+                    navigator.clipboard.writeText(url)
+                        .then(() => {
+                            alert('Ο σύνδεσμος αντιγράφηκε στο πρόχειρο! Μπορείτε τώρα να τον μοιραστείτε.');
+                        })
+                        .catch(err => {
+                            console.error('Σφάλμα αντιγραφής:', err);
+                            alert('Δεν ήταν δυνατή η αντιγραφή του συνδέσμου. Παρακαλώ αντιγράψτε τον manually από τη γραμμή διευθύνσεων.');
+                        });
+                }
+            });
+            
+            // Εμφάνιση λεπτομερειών αρχής
+            function showPrincipleDetails(principleNumber) {
+                const principle = principlesData[principleNumber];
+                
+                detailsTitle.textContent = principle.title;
+                detailsText.innerHTML = principle.text;
+                detailsExample.innerHTML = principle.example;
+                
+                // Δημιουργία step indicator
+                stepIndicator.innerHTML = '';
+                for (let i = 1; i <= 7; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = `step-dot ${i == principleNumber ? 'active' : ''}`;
+                    dot.setAttribute('data-step', i);
+                    dot.addEventListener('click', function() {
+                        showPrincipleDetails(this.getAttribute('data-step'));
+                    });
+                    stepIndicator.appendChild(dot);
+                }
+                
+                detailsPanel.style.display = 'block';
+                
+                // Scroll στο panel
+                detailsPanel.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
